@@ -1,0 +1,20 @@
+{
+  "name": "common-helpers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src/components --out-dir lib/components",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ModulUI/common-helpers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ModulUI/common-helpers/issues"
+  },
+  "homepage": "https://github.com/ModulUI/common-helpers#readme"
+}
