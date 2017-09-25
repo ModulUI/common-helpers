@@ -1,5 +1,5 @@
 {
-  "name": "common-helpers",
+  "name": "modul-helpers",
   "version": "1.0.0",
   "description": "Хелперы",
   "main": "lib/index.js",
