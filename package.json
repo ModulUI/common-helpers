@@ -1,6 +1,6 @@
 {
   "name": "modul-helpers",
-  "version": "0.1.6",
+  "version": "0.1.9",
   "description": "Хелперы",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -14,7 +14,8 @@
     "build1": "babel src/index.js --out-file index.js --source-maps",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build": "npm run build:commonjs && npm run build:es"
+    "build": "npm run build:commonjs && npm run build:es",
+    "git-pub": "git commit -am 'fix' && git push && npm run build && npm publish"
   },
   "repository": {
     "type": "git",
