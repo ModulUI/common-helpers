@@ -20,15 +20,11 @@ export const validPassword = (password) => {
 	return !isEmpty(password) && /^[A-Za-z0-9!"№%:;@#$%^&*(){}?_+=<>\~`§.\[\],\\\/|]+$/g.test(password); //должны быть буквы и цифры, заглавные и маленькие
 };
 
-export const validPasswordLength = (password) => {
-	return !isEmpty(password) && password.length >= 8;
-};
+export const validPasswordLength = password => !isEmpty(password) && password.length >= 8;
 
-export const isEmpty = val => {
-	return val === '' || val === null || val === undefined;
-};
+export const isEmpty = val => val === '' || val === null || val === undefined;
 
-export const isRequired = (text) => (val) => isEmpty(val) ? text : undefined;
+export const isRequired = text => val => isEmpty(val) ? text : undefined;
 
 export const isCorrectInn = function (INN) {
 	var factor1 = [2, 4, 10, 3, 5, 9, 4, 6, 8];
@@ -40,7 +36,7 @@ export const isCorrectInn = function (INN) {
 	var Result = false;
 	var d;
 	if (INN.length == 0) {
-		Result = true;
+		result = true;
 	}
 	else if (INN.length == 10) { //юр лицо
 		sum = 0;
@@ -50,7 +46,7 @@ export const isCorrectInn = function (INN) {
 		}
 		sum = sum % 11;
 		sum = sum % 10;
-		Result = INN.slice(9, 10) == sum;
+		result = INN.slice(9, 10) == sum;
 
 	}
 	else if (INN.length == 12) {//физ лицо и ИП
@@ -68,16 +64,62 @@ export const isCorrectInn = function (INN) {
 		}
 		sum2 = sum2 % 11;
 		sum2 = sum2 % 10;
-		Result = INN.slice(10, 11) == sum &&
+		result = INN.slice(10, 11) == sum &&
 			INN.slice(11, 12) == sum2;
 	}
-	return Result;
+	return result;
 };
 
-export const isCorrectKpp = (val) => {
-	if (!val)
-		return true;
-	return val.length === 9;
+export const isCorrectKpp = val => !val || val.length === 9
+
+export const isCorrectControlKeyBankAccount = (bankAccount, bik) => {
+  if (!bankAccount || !bik) return false;
+  const coefficient = [7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1];
+  let controlNumber = bik.toString().substr(-3);
+  if (controlNumber <= 2) {
+    controlNumber = '0'.concat(bik.toString().substr(-5, 2));
+  }
+  const tempAcccount = controlNumber.concat(bankAccount);
+  let sum = 0;
+  for (let i = 0; i < tempAcccount.length; i++) {
+    sum += (Number(tempAcccount.charAt(i)) * coefficient[i]) % 10;
+  }
+  return sum % 10 === 0;
+};
+
+const isCorrectSnils = function (snils) {
+  if (snils.length !== 11 && !/^\d*$|^$/.test(snils)) return false;
+  if (snils < 1001998) return false;
+  const part = snils.slice(0, 9);
+  let sum = 0;
+  for (let i = 0; i < part.length; i++) {
+    sum += part[i] * (part.length - i);
+  }
+  /*eslint-disable*/
+  if (sum < 100 && sum == snils.slice(-2)) return true;
+  /*eslint-enable*/
+  if (sum === 100 || sum === 101) snils.slice(-2) === '00';
+  if (sum > 101) {
+    sum %= 101;
+    if (sum < 100 && sum === snils.slice(-2)) return true;
+    if (sum === 100 || sum === 101) return snils.slice(-2) === '00';
+  }
+  return false;
+};
+
+export const isCorrectOgrn13 = o => o.slice(-1) === (`${ o.slice(0, -1) % 11 }`).slice(-1);
+
+export const isCorrectOgrn15 = o => o.slice(-1) === (`${ o.slice(0, -1) % 13 }`).slice(-1);
+
+export const isOgrn = ogrn => {
+  if (!ogrn) { return true; }
+  // проверяем длину
+  if (ogrn.length !== 13 && ogrn.length !== 15) { return false; }
+  // проверяем число ли
+  if (!/^\d+$|^$/.test(ogrn)) { return false; }
+  // проверяем контрольную сумму
+  if (ogrn.length === 15) { return isCorrectOgrn15(ogrn); }
+  return isCorrectOgrn13(ogrn);
 };
 
 export const isValidNumber = val => {
