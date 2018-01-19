@@ -11,7 +11,7 @@ demo/node_modules
 
 # testing
 demo/coverage
-
+package-lock.json
 # production
 demo/build
 
