@@ -87,7 +87,7 @@ export const isCorrectControlKeyBankAccount = (bankAccount, bik) => {
   return sum % 10 === 0;
 };
 
-const isCorrectSnils = function (snils) {
+export const isCorrectSnils = function (snils) {
   if (snils.length !== 11 && !/^\d*$|^$/.test(snils)) return false;
   if (snils < 1001998) return false;
   const part = snils.slice(0, 9);
