@@ -1,6 +1,6 @@
 {
   "name": "modul-helpers",
-  "version": "0.1.94",
+  "version": "0.1.95",
   "description": "Хелперы",
   "main": "lib/index.js",
   "module": "es/index.js",
