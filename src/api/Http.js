@@ -7,7 +7,7 @@ class Http {
   http(params) {
     const self = this;
     return this.interceptors
-      .apply(Promise.resolve(self._normalizeHttpOptions(params)), ::self._serverRequest);
+      .apply(Promise.resolve(self._normalizeHttpOptions(params)), self._serverRequest.bind(self));
   }
 
   _normalizeHttpOptions(params) {
