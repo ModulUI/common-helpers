@@ -1,3 +1,31 @@
 {
-  "presets": ["env"]
+  "plugins": [
+    "transform-class-properties",
+    "syntax-decorators",
+    "transform-decorators-legacy",
+    "react-html-attrs",
+    "transform-es2015-modules-commonjs"
+  ],
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
+    "react",
+    "stage-0"
+  ],
+  "env": {
+    "dev": {
+      "presets": [
+        "react-hmre"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
 }
