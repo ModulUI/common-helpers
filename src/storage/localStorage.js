@@ -17,4 +17,4 @@ if (cookies.enabled()) {
 }
 
 
-export default storageFactory(storage);
+export const localStorage = storageFactory(storage)
