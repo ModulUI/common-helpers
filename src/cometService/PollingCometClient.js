@@ -3,7 +3,7 @@
  */
 
 //import Q from './../Q.js';
-import api from './../api.js'
+//import api from './../api.js'
 import AbstractCometClient from './AbstractCometClient'
 
 class PollingCometClient extends AbstractCometClient {
