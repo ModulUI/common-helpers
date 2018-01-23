@@ -1,7 +1,7 @@
 /**
  * Работа с comet-сервером по web socket-у
  */
-import AbstractCometClient from './abstractCometClient.js'
+import AbstractCometClient from './AbstractCometClient'
 
 class WebSocketsCometClient extends AbstractCometClient {
 	constructor() {
