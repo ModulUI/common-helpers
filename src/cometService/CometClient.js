@@ -58,9 +58,7 @@ class CometClient {
             this.cometInstance = null;
         }
 
-        connect();
-
-        function connect(excludeTransport) {
+        const connect = (excludeTransport) => {
             let inst = null;
 
             let i = 0;
@@ -92,9 +90,9 @@ class CometClient {
                     onRetryFail: onRetryFail
                 });
             }
-        }
+        };
 
-        function onReceiveMessage(response) {
+        const onReceiveMessage = (response) => {
             let events = response.data;
             if (events && events.length > 0) {
                 events.forEach((event) => {
@@ -112,9 +110,9 @@ class CometClient {
                         .then(_ => this.publisher(handlerName, data));
                 });
             }
-        }
+        };
 
-        function checkInterceptors(interceptors, handlerName, event) {
+        const checkInterceptors = (interceptors, handlerName, event) => {
             let prom = new Promise((resolve) => resolve(true));
             if (interceptors) {
                 interceptors.forEach(interceptor => {
@@ -126,16 +124,18 @@ class CometClient {
                 });
             }
             return prom;
-        }
+        };
 
-        function onError(exception) {
+        const onError = (exception) => {
             // eslint-disable-next-line no-console
             console.debug(`[${new Date()}] Comet: error`, exception);
-        }
+        };
 
-        function onRetryFail(failedTransport) {
+        const onRetryFail = (failedTransport) => {
             connect(failedTransport);
-        }
+        };
+
+        connect();
     }
 
     /**
