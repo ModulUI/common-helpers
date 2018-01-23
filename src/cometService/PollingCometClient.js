@@ -64,7 +64,7 @@ class PollingCometClient extends AbstractCometClient {
             // }, {'X-TOKEN': self.params.xToken})
             //     .then(success)
             //     .catch(error)
-            return this
+            return self
                 .httpClient({
                     method: 'GET',
                     url: url,
