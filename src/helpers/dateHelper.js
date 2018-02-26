@@ -201,6 +201,18 @@ export default {
 		}
 	},
 
+    // сначала года, до текущей даты
+    getBeginYearForTodayDates(date){
+		var now = date;
+		var start = new Date(now.getFullYear(), 0, 1);
+		var stop = new Date();
+
+		return {
+			startDate: start,
+			stopDate: stop
+		}
+	},
+
 	countCalendarDayBetween(date1, date2){
 		function createOnlyDate(date) {
 			var d = new Date(date.getTime());
