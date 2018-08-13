@@ -1,6 +1,6 @@
 {
   "name": "modul-helpers",
-  "version": "0.1.104",
+  "version": "0.1.105",
   "description": "Хелперы",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -10,7 +10,8 @@
     "src"
   ],
   "scripts": {
-    "test": "echo \"Errorr: no test specified\" && exit 1",
+    "test": "jest",
+    "test-watch": "jest --watchAll",
     "build1": "babel src/index.js --out-file index.js --source-maps",
     "build2": "babel ./src --out-dir ./lib",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
@@ -44,7 +45,12 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
     "babel-register": "6.11.6",
-    "cross-env": "^5.1.3"
+    "cross-env": "^5.1.3",
+    "jest": "^23.5.0",
+    "pre-commit": "^1.2.2"
   },
+  "pre-commit": [
+    "test"
+  ],
   "homepage": "https://github.com/ModulUI/common-helpers#readme"
 }
