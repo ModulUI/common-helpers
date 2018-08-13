@@ -95,13 +95,13 @@ export const isCorrectSnils = function (snils) {
   for (let i = 0; i < part.length; i++) {
     sum += part[i] * (part.length - i);
   }
-  /*eslint-disable*/
-  if (sum < 100 && sum == snils.slice(-2)) return true;
-  /*eslint-enable*/
-  if (sum === 100 || sum === 101) snils.slice(-2) === '00';
+  if (sum < 100 && sum === parseInt(snils.slice(-2))) return true;
+  if (sum === 100 || sum === 101) {
+      return snils.slice(-2) === '00';
+  }
   if (sum > 101) {
     sum %= 101;
-    if (sum < 100 && sum === snils.slice(-2)) return true;
+    if (sum < 100 && sum === parseInt(snils.slice(-2))) return true;
     if (sum === 100 || sum === 101) return snils.slice(-2) === '00';
   }
   return false;
