@@ -560,6 +560,11 @@ export default {
 			out.date = new Date(0, 0, 0, out.hour, out.min, out.sec, 0);
 		}
 		return out.date;
-	}
-
+	},
+    addDaysToDate(date, days) {
+        const dateOffset = (24 * 60 * 60 * 1000) * days;
+        const newDate = new Date();
+        newDate.setTime(newDate.getTime() + dateOffset);
+        return newDate;
+    }
 }
