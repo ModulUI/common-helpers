@@ -563,7 +563,7 @@ export default {
 	},
     addDaysToDate(date, days) {
         const dateOffset = (24 * 60 * 60 * 1000) * days;
-        const newDate = new Date();
+        const newDate = date;
         newDate.setTime(newDate.getTime() + dateOffset);
         return newDate;
     }
