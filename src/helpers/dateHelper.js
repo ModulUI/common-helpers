@@ -50,15 +50,15 @@ export default {
 	},
 
 
-	monthDeclinationRu(month){
+	monthDeclinationRu(month) {
 		return (month == 3 || month == 8) ? this.i18n.ru.monthName[month - 1] + 'а' : this.i18n[this.currentLocal].monthName[month - 1].slice(0, -1) + 'я';
 	},
 
-	monthDeclinationRuPredlojniy(month){
+	monthDeclinationRuPredlojniy(month) {
 		return (month == 3 || month == 8) ? this.i18n.ru.monthName[month - 1] + 'е' : this.i18n[this.currentLocal].monthName[month - 1].slice(0, -1) + 'е';
 	},
 
-	getDayName(day, countChar){
+	getDayName(day, countChar) {
 		var dayName = this.i18n[this.currentLocal].dayNames[day];
 		if (countChar && countChar > 0) {
 			return dayName.substring(0, 3);
@@ -66,15 +66,15 @@ export default {
 		return dayName;
 	},
 
-	getMonthName(monthNumber, declination, countChar){
+	getMonthName(monthNumber, declination, countChar) {
 		var monthName = declination ? this.monthDeclinationRu(monthNumber) : this.i18n.ru.monthName[monthNumber - 1];
-		if (!countChar && countChar > 0) {
+		if (countChar > 0) {
 			return monthName.substring(0, 3);
 		}
 		return monthName;
 	},
 
-	getCurrentWeekDates(date){
+	getCurrentWeekDates(date) {
 		var now = date;
 		var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 		var delta = start.getDay() > 0 ? 1 : -6;
@@ -88,7 +88,7 @@ export default {
 		}
 	},
 
-	getLastWeekDates(date){
+	getLastWeekDates(date) {
 		var now = date;
 		var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 		var delta = start.getDay() > 0 ? 1 : -6;
@@ -102,7 +102,7 @@ export default {
 		}
 	},
 
-	getCurrentMonthDates(date){
+	getCurrentMonthDates(date) {
 		var now = date;
 		var start = new Date(now.getFullYear(), now.getMonth(), 1);
 		var stop = new Date(now.getFullYear(), now.getMonth(), this.daysInMonth(now));
@@ -113,7 +113,7 @@ export default {
 		}
 	},
 
-	getLastMonthDates(date){
+	getLastMonthDates(date) {
 		var now = date;
 		var start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
 		var firstDayInlastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
@@ -125,7 +125,7 @@ export default {
 		}
 	},
 
-	getCurrentQuarterDates(date){
+	getCurrentQuarterDates(date) {
 		var now = date,
 			start = '',
 			stop = '';
@@ -163,7 +163,7 @@ export default {
 		}
 	},
 
-	getLast30DaysDates(date){
+	getLast30DaysDates(date) {
 		var now = date;
 		var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 		start.setDate(start.getDate() - 30);
@@ -175,7 +175,7 @@ export default {
 		}
 	},
 
-	getDateRange(date){
+	getDateRange(date) {
 		var start = this.setStartDate(new Date(date.getTime()));
 		var stop = this.setEndDate(new Date(date.getTime()));
 		return {
@@ -184,13 +184,13 @@ export default {
 		}
 	},
 
-	getYesterday(){
+	getYesterday() {
 		let date = new Date();
 		date = this.setStartDate(date);
 		return new Date(date.getTime() - 1000 * 60 * 60 * 24);
 	},
 
-	getCurrentYearDates(date){
+	getCurrentYearDates(date) {
 		var now = date;
 		var start = new Date(now.getFullYear(), 0, 1);
 		var stop = new Date(now.getFullYear(), 11, 31);
@@ -201,8 +201,8 @@ export default {
 		}
 	},
 
-    // сначала года, до текущей даты
-    getBeginYearForTodayDates(date){
+	// сначала года, до текущей даты
+	getBeginYearForTodayDates(date) {
 		var now = date;
 		var start = new Date(now.getFullYear(), 0, 1);
 		var stop = new Date();
@@ -213,7 +213,7 @@ export default {
 		}
 	},
 
-	countCalendarDayBetween(date1, date2){
+	countCalendarDayBetween(date1, date2) {
 		function createOnlyDate(date) {
 			var d = new Date(date.getTime());
 			d.setHours(0, 0, 0, 0);
@@ -227,15 +227,15 @@ export default {
 		return Math.abs(dayCount);
 	},
 
-	isYesterday(now, date){
+	isYesterday(now, date) {
 		return now > date && this.countCalendarDayBetween(now, date) == 1;
 	},
 
-	countHourBetween(date1, date2){
+	countHourBetween(date1, date2) {
 		return (date1 - date2) / (1000 * 60 * 60);
 	},
 
-	isValidDate(date){
+	isValidDate(date) {
 		if (Object.prototype.toString.call(date) === "[object Date]") {
 			if (isNaN(date.getTime())) {
 				return false;
@@ -249,17 +249,17 @@ export default {
 		}
 	},
 
-	setStartDate(date){
+	setStartDate(date) {
 		date.setHours(0, 0, 0, 0);
 		return date;
 	},
 
-	setEndDate(date){
+	setEndDate(date) {
 		date.setHours(23, 59, 59, 999)
 		return date;
 	},
 
-	dateFormat(date, format, alternativeFormat, dateTimeNow){
+	dateFormat(date, format, alternativeFormat, dateTimeNow) {
 		var mask;
 		var prefix = '';
 		var token = /d{1,4}(?::?[C]?)|m{1,4}(?::?[IRCP]?)|yy(?:yy|y)?(?::?[IRC]?)|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
@@ -414,6 +414,17 @@ export default {
 			}
 		}
 
+		if (format == 'messenger') {
+			mask = 'dd.mm.yy';
+
+			if (isCurrentYear) {
+				mask = 'dd mmm';
+			}
+			if (isCurrentDay) {
+				mask = 'HH:MM';
+			}
+		}
+
 		var parsedDate = mask.replace(token, function ($0) {
 			return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
 		});
@@ -421,7 +432,7 @@ export default {
 		return prefix + parsedDate;
 	},
 
-	stringToDate(dateString){
+	stringToDate(dateString) {
 		if (!isString(dateString)) {
 			return undefined;
 		}
@@ -437,7 +448,7 @@ export default {
 	},
 
 
-	daysInMonth(date){
+	daysInMonth(date) {
 		return 33 - new Date(date.getFullYear(), date.getMonth(), 33).getDate(); //такой вот хак для вычисления количества дней в месяце
 	},
 
@@ -561,10 +572,10 @@ export default {
 		}
 		return out.date;
 	},
-    addDaysToDate(date, days) {
-        const dateOffset = (24 * 60 * 60 * 1000) * days;
-        const newDate = date;
-        newDate.setTime(newDate.getTime() + dateOffset);
-        return newDate;
-    }
+	addDaysToDate(date, days) {
+		const dateOffset = (24 * 60 * 60 * 1000) * days;
+		const newDate = date;
+		newDate.setTime(newDate.getTime() + dateOffset);
+		return newDate;
+	}
 }
