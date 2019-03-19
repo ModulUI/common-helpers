@@ -433,11 +433,11 @@ export default {
             }
             if (isCurrentDay) {
                 prefix = this.i18n[this.currentLocal].today + ', ';
-				mask = 'HH:MM';
+                mask = 'HH:MM';
             }
             if (isYesterday) {
                 prefix = this.i18n[this.currentLocal].yesterday + ', ';
-				mask = 'HH:MM';
+                mask = 'HH:MM';
             }
         }
 
