@@ -424,6 +424,20 @@ export default {
 				mask = 'HH:MM';
 			}
 		}
+		if (format === 'activities') {
+			mask = 'dd.mm.yy, HH:MM';
+			if (isCurrentYear) {
+				mask = 'dd mmm, HH:MM';
+			}
+			if (isCurrentDay) {
+				prefix = this.i18n[this.currentLocal].today + ', ';
+				mask = 'HH:MM';
+			}
+			if (isYesterday) {
+				prefix = this.i18n[this.currentLocal].yesterday + ', ';
+				mask = 'HH:MM';
+			}
+		}
 
 		var parsedDate = mask.replace(token, function ($0) {
 			return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
